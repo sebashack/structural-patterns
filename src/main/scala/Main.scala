@@ -10,17 +10,14 @@ import input.reader._
 object Main extends App {
   val lg = new Logger
 
+  println(lg.warning("Oh No!! Something's wrong"))
+
   val stream = new BufferedReader((new InputStreamReader(
     new BufferedInputStream(
       this.getClass.getResourceAsStream("/home/sebashack/scalaTest/structual/data.txt"))
   )))
 
-  val reader = new Base64EncoderInputReader(
-    new CapitalizedInputReader(
-      new AdvancedInputReader(stream)
-    )
-  )
-
-  println(lg.warning("Oh No!! Something's wrong"))
-
+  val reader = new AdvancedInputReader(stream)
+      with CapitalizedInputReader
+      with Base64EncoderInputReader
 }
